@@ -1,0 +1,31 @@
+<div class="search-users">
+    <div>Search
+      <input [(ngModel)]="searchPattern" class="form-control" type="text"/>
+      <button (click)="applySearch()" type="submit" class="btn btn-primary">Search</button>
+      <a routerLink="/users/create" type="submit" class="btn btn-success">Crete user</a>
+    </div>
+</div>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">name</th>
+    <th scope="col">surname</th>
+    <th scope="col">email</th>
+    <th scope="col">delete</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users">
+    <td>{{user.name}}</td>
+    <td>{{user.surname}}</td>
+    <td>{{user.email}}</td>
+    <td><a (click)="delete(user.id)" type="submit"  class="btn delete btn-danger">delete</a></td>
+  </tr>
+  </tbody>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a *ngIf="toNumber(page) * 10 && page > 0 <= total" class="page-link" routerLink="/users/page/{{page/1-1}}">Previous</a></li>
+      <li class="page-item"><a *ngIf="(toNumber(page) + 1) * 10 < total" class="page-link" routerLink="/users/page/{{page/1+1}}">Next</a></li>
+    </ul>
+  </nav>
+</table>
