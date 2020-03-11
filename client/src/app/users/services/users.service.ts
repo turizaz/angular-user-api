@@ -10,7 +10,7 @@ export class UsersService {
   constructor(private http: HttpClient) { }
 
   static formLink(page: number, pattern: string): string {
-    return pattern ?  `/api/users/page/${(!pattern && page) | 0}/${pattern}` : page ? `/api/users/page/${page}` : `/api/users/page`;
+    return pattern ?  `/api/users/page/${page || 0}/${pattern}` : page ? `/api/users/page/${page}` : `/api/users/page`;
   }
 
   get(page, pattern): Observable<UserModel[]> {
