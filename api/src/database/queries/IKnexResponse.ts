@@ -1,3 +1,3 @@
-export interface IKnexResponse {
-    rows: Array<string>
+export interface IKnexResponse<Model> {
+    rows: Model[]
 }

@@ -1,5 +1,8 @@
 <div class="container">
   <h1>Create user</h1>
+  <div *ngIf="errors" class="alert alert-danger" role="alert">
+    Connection error or unprocessable call
+  </div>
   <form [formGroup]="userForm" (ngSubmit)="onSubmit($event)">
     <div class="form-group">
       <label for="name">Name <small>(First letter should be capital, only latin letters allowed)</small></label>

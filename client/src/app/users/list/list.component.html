@@ -15,6 +15,9 @@
   </tr>
   </thead>
   <tbody>
+  <div *ngIf="errors" class="alert alert-danger" role="alert">
+    Connection error
+  </div>
   <tr *ngFor="let user of users">
     <td>{{user.name}}</td>
     <td>{{user.surname}}</td>
@@ -24,8 +27,8 @@
   </tbody>
   <nav aria-label="Page navigation example">
     <ul class="pagination">
-      <li class="page-item"><a *ngIf="toNumber(page) * 10 && page > 0 <= total" class="page-link" routerLink="/users/page/{{page/1-1}}">Previous</a></li>
-      <li class="page-item"><a *ngIf="(toNumber(page) + 1) * 10 < total" class="page-link" routerLink="/users/page/{{page/1+1}}">Next</a></li>
+      <li class="page-item"><a *ngIf="hasPrev(page, total)" class="page-link" routerLink="/users/page/{{toNumber(page)-1}}">Previous</a></li>
+      <li class="page-item"><a *ngIf="hasNext(page, total)" class="page-link" routerLink="/users/page/{{toNumber(page)+1}}">Next</a></li>
     </ul>
   </nav>
 </table>

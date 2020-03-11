@@ -1,14 +1,15 @@
-const config = require('./knexfile')
+const config = require("./knexfile")
 
-const db = require('knex')({
-    client: 'pg',
-    version: '7.2',
+const db = require("knex")({
+    client: "pg",
     connection: {
+        database : config.development.connection.database,
         host : config.development.connection.host,
-        user : config.development.connection.user,
         password : config.development.connection.password,
-        database : config.development.connection.database
+        user : config.development.connection.user,
     },
-    migrations:  config.development.migrations
+    migrations:  config.development.migrations,
+    version: "7.2",
 });
-export default db
+
+export default db;

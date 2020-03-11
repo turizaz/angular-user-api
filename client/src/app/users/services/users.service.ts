@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import UserModel from "../models/user.model";
-import {Observable} from "rxjs";
+import UserModel from '../models/user.model';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,21 +9,19 @@ import {Observable} from "rxjs";
 export class UsersService {
   constructor(private http: HttpClient) { }
 
-  get(page, searchPattern): Observable<UserModel & {total: number}[]> {
-    let url;
-    if (searchPattern) {
-      url = `/api/users/page/${page | 0}/${searchPattern}`;
-    } else {
-      url = page ? `/api/users/page/${page}` : `/api/users/page`;
-    }
-    return this.http.get<UserModel & {total: number}[]>(url)
+  static formLink(page: number, pattern: string): string {
+    return pattern ?  `/api/users/page/${(!pattern && page) | 0}/${pattern}` : page ? `/api/users/page/${page}` : `/api/users/page`;
   }
 
-  delete(id) {
-    return this.http.delete(`/api/users/${id}`)
+  get(page, pattern): Observable<UserModel[]> {
+    return this.http.get<UserModel[]>(UsersService.formLink(page, pattern));
   }
 
-  create(user) {
-    return this.http.post<UserModel[]>(`/api/users`, user)
+  delete(id): Observable<any> {
+    return this.http.delete(`/api/users/${id}`);
+  }
+
+  create(user): Observable<any>  {
+    return this.http.post<UserModel[]>(`/api/users`, user);
   }
 }
